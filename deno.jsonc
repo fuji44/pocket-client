@@ -1,6 +1,7 @@
 {
   "importMap": "import_map.jsonc",
   "tasks": {
-    "test": "deno test --allow-env --allow-net"
+    "test": "deno test --allow-env --allow-net",
+    "cli": "deno run --allow-env --allow-net cli.ts"
   }
 }
