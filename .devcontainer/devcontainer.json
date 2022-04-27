@@ -22,5 +22,8 @@
     "denoland.vscode-deno",
     "EditorConfig.EditorConfig"
   ],
-  "remoteUser": "vscode"
+  "remoteUser": "vscode",
+  "remoteEnv": {
+    "PATH": "${containerEnv:HOME}/.deno/bin:${containerEnv:PATH}"
+  }
 }
