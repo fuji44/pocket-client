@@ -1,11 +1,6 @@
-export class PocketClient {
-  constructor(readonly consumerKey: string) {
-    if (!consumerKey) {
-      throw new Error("Pocket API consumer key is required");
-    }
-  }
-
-  async fetchRequestToken(
+export class PocketAuthClient {
+  static async fetchRequestToken(
+    consumerKey: string,
     redirectUri: string,
     state?: string,
   ): Promise<RequestTokenResult> {
@@ -18,7 +13,7 @@ export class PocketClient {
         method: "POST",
         headers: headers,
         body: JSON.stringify({
-          consumer_key: this.consumerKey,
+          consumer_key: consumerKey,
           redirect_uri: redirectUri,
           state,
         }),

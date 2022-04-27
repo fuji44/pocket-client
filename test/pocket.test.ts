@@ -1,10 +1,5 @@
 import { assertEquals, fail } from "std/testing/asserts.ts";
-import { PocketClient } from "../src/pocket.ts";
-
-Deno.test("Create Instance", () => {
-  const client = new PocketClient("dummy");
-  assertEquals(client.consumerKey, "dummy");
-});
+import { PocketAuthClient } from "../src/pocket.ts";
 
 Deno.test("Fetch request token", async () => {
   const consumerKey = Deno.env.get("POCKET_CONSUMER_KEY");
@@ -14,10 +9,8 @@ Deno.test("Fetch request token", async () => {
     );
   }
 
-  const client = new PocketClient(consumerKey);
-  assertEquals(client.consumerKey, consumerKey);
-
-  const result = await client.fetchRequestToken(
+  const result = await PocketAuthClient.fetchRequestToken(
+    consumerKey,
     "http://localhost:3000/dummy/callback",
   );
   assertEquals(result.code.length, 30);
@@ -36,10 +29,8 @@ Deno.test("Fetch request token | set state", async () => {
     );
   }
 
-  const client = new PocketClient(consumerKey);
-  assertEquals(client.consumerKey, consumerKey);
-
-  const result = await client.fetchRequestToken(
+  const result = await PocketAuthClient.fetchRequestToken(
+    consumerKey,
     "http://localhost:3000/dummy/callback",
     "dummy state",
   );
