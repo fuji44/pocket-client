@@ -1,0 +1,42 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "request": "launch",
+      "name": "Deno Test",
+      "type": "pwa-node",
+      "program": "${file}",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "deno",
+      "runtimeArgs": [
+        "test",
+        "--unstable",
+        "--config",
+        "./deno.jsonc",
+        "--inspect-brk",
+        "--allow-all"
+      ],
+      "envFile": "${workspaceFolder}/.env",
+      "attachSimplePort": 9229,
+      "console": "integratedTerminal"
+    },
+    {
+      "request": "launch",
+      "name": "Deno Test All",
+      "type": "pwa-node",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "deno",
+      "runtimeArgs": [
+        "test",
+        "--unstable",
+        "--config",
+        "./deno.jsonc",
+        "--inspect-brk",
+        "--allow-all"
+      ],
+      "envFile": "${workspaceFolder}/.env",
+      "attachSimplePort": 9229,
+      "console": "integratedTerminal"
+    }
+  ]
+}
