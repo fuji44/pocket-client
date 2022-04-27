@@ -13,10 +13,11 @@ async function servePocketAuthCallback(
       consumerKey,
       requestToken,
     );
-    console.log("User authentication was successful!!\n");
-    console.log(`Access Token: ${result.accessToken}`);
-    console.log(`Username: ${result.username}`);
-    console.log(`State: ${state}`);
+    console.log("\nUser authentication was successful!!\n");
+    console.log({
+      ...result,
+      state,
+    });
 
     const body =
       "User authentication was successful!!\nThe access token was output to the console.\n\nPlease close this window.";
