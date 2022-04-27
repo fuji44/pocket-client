@@ -25,7 +25,12 @@ export class PocketClient {
       },
     );
     const response = await fetch(request);
-    return await response.json();
+    const json = await response.json();
+    return {
+      ...json,
+      authorizationUrl:
+        `https://getpocket.com/auth/authorize?request_token=${json.code}&redirect_uri=${redirectUri}`,
+    };
   }
 }
 
@@ -34,7 +39,14 @@ export type RequestTokenResult = {
   code: string;
   /**
    * A string of metadata used by your app.
+   *
    * This string will be returned in all subsequent authentication responses.
    */
   state?: string;
+  /**
+   * URL to continue authentication.
+   *
+   * A browser request must be made to this URL to obtain authorization from the user.
+   */
+  authorizationUrl: string;
 };

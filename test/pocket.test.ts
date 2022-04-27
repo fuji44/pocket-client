@@ -17,11 +17,15 @@ Deno.test("Fetch request token", async () => {
   const client = new PocketClient(consumerKey);
   assertEquals(client.consumerKey, consumerKey);
 
-  const requestToken = await client.fetchRequestToken(
+  const result = await client.fetchRequestToken(
     "http://localhost:3000/dummy/callback",
   );
-  assertEquals(requestToken.code.length, 30);
-  assertEquals(requestToken.state, null);
+  assertEquals(result.code.length, 30);
+  assertEquals(result.state, null);
+  assertEquals(
+    result.authorizationUrl,
+    `https://getpocket.com/auth/authorize?request_token=${result.code}&redirect_uri=http://localhost:3000/dummy/callback`,
+  );
 });
 
 Deno.test("Fetch request token | set state", async () => {
@@ -41,4 +45,8 @@ Deno.test("Fetch request token | set state", async () => {
   );
   assertEquals(result.code.length, 30);
   assertEquals(result.state, "dummy state");
+  assertEquals(
+    result.authorizationUrl,
+    `https://getpocket.com/auth/authorize?request_token=${result.code}&redirect_uri=http://localhost:3000/dummy/callback`,
+  );
 });
