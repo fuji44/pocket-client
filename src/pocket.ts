@@ -1,7 +1,7 @@
 export class PocketAuthClient {
   static async fetchRequestToken(
-    consumerKey: string,
-    redirectUri: string,
+    consumer_key: string,
+    redirect_uri: string,
     state?: string,
   ): Promise<RequestTokenResult> {
     const headers = new Headers();
@@ -13,8 +13,8 @@ export class PocketAuthClient {
         method: "POST",
         headers: headers,
         body: JSON.stringify({
-          consumer_key: consumerKey,
-          redirect_uri: redirectUri,
+          consumer_key: consumer_key,
+          redirect_uri: redirect_uri,
           state,
         }),
       },
@@ -23,14 +23,14 @@ export class PocketAuthClient {
     const json = await response.json();
     return {
       ...json,
-      authorizationUrl:
-        `https://getpocket.com/auth/authorize?request_token=${json.code}&redirect_uri=${redirectUri}`,
+      authorization_url:
+        `https://getpocket.com/auth/authorize?request_token=${json.code}&redirect_uri=${redirect_uri}`,
     };
   }
 
   static async fetchAccessToken(
-    consumerKey: string,
-    requestToken: string,
+    consumer_key: string,
+    request_token: string,
   ): Promise<AccessTokenResult> {
     const headers = new Headers();
     headers.append("content-type", "application/json; charset=UTF8");
@@ -41,15 +41,15 @@ export class PocketAuthClient {
         method: "POST",
         headers: headers,
         body: JSON.stringify({
-          consumer_key: consumerKey,
-          code: requestToken,
+          consumer_key: consumer_key,
+          code: request_token,
         }),
       },
     );
     const response = await fetch(request);
     const json = await response.json();
     return {
-      accessToken: json.access_token,
+      access_token: json.access_token,
       username: json.username,
     };
   }
@@ -69,10 +69,10 @@ export type RequestTokenResult = {
    *
    * A browser request must be made to this URL to obtain authorization from the user.
    */
-  authorizationUrl: string;
+  authorization_url: string;
 };
 
 export type AccessTokenResult = {
-  accessToken: string;
+  access_token: string;
   username: string;
 };

@@ -16,7 +16,7 @@ Deno.test("Fetch request token", async () => {
   assertEquals(result.code.length, 30);
   assertEquals(result.state, null);
   assertEquals(
-    result.authorizationUrl,
+    result.authorization_url,
     `https://getpocket.com/auth/authorize?request_token=${result.code}&redirect_uri=http://localhost:3000/dummy/callback`,
   );
 });
@@ -37,7 +37,7 @@ Deno.test("Fetch request token | set state", async () => {
   assertEquals(result.code.length, 30);
   assertEquals(result.state, "dummy state");
   assertEquals(
-    result.authorizationUrl,
+    result.authorization_url,
     `https://getpocket.com/auth/authorize?request_token=${result.code}&redirect_uri=http://localhost:3000/dummy/callback`,
   );
 });
